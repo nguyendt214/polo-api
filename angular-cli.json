@@ -1,7 +1,7 @@
 {
   "project": {
-    "version": "1.0.0-beta.28.3",
-    "name": "angular4"
+    "version": "1.0.0",
+    "name": "KEVINBLACK"
   },
   "apps": [
     {
@@ -18,10 +18,10 @@
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.scss"
       ],
       "scripts": [],
-      "environments": {
+      "environmentSource": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
@@ -49,7 +49,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "prefixInterfaces": false,
     "inline": {
       "style": false,

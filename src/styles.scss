@@ -1,0 +1,19 @@
+@import "../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+html {
+  -webkit-text-size-adjust: none;
+}
+
+body {
+  background-color: #F5F7FA;
+  color: #000000;
+  font-size: 14px;
+  font-family: Roboto, Arial, 'sans-serif';
+  line-height: normal;
+}
+.mat-tab-body-content {
+  padding: 10px;
+}
+
+
