@@ -5,7 +5,8 @@
   <md-tab label="BTC">
     <div class="container">
       <div class="col-sm-6 col-md-6" *ngFor="let coin of btcList">
-        <md-checkbox>{{ coin.name }} ( {{ coin.code }})</md-checkbox>
+        <md-checkbox checked="true" *ngIf="coin.has == 2" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
+        <md-checkbox *ngIf="coin.has == 1" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
       </div>
     </div>
   </md-tab>
@@ -13,7 +14,8 @@
   <md-tab label="XMR">
     <div class="container">
       <div class="col-sm-6 col-md-6" *ngFor="let coin of xmrList">
-        <md-checkbox checked="true">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
+        <md-checkbox checked="true" *ngIf="coin.has == 2" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
+        <md-checkbox *ngIf="coin.has == 1" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
       </div>
     </div>
   </md-tab>
@@ -21,7 +23,8 @@
   <md-tab label="ETH">
     <div class="container">
       <div class="col-sm-6 col-md-6" *ngFor="let coin of ethList">
-        <md-checkbox>{{ coin.name }} ( {{ coin.code }})</md-checkbox>
+        <md-checkbox checked="true" *ngIf="coin.has == 2" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
+        <md-checkbox *ngIf="coin.has == 1" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
       </div>
     </div>
   </md-tab>
@@ -29,7 +32,8 @@
   <md-tab label="USDT">
     <div class="container">
       <div class="col-sm-6 col-md-6" *ngFor="let coin of usdtList">
-        <md-checkbox>{{ coin.name }} ( {{ coin.code }})</md-checkbox>
+        <md-checkbox checked="true" *ngIf="coin.has == 2" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
+        <md-checkbox *ngIf="coin.has == 1" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
       </div>
     </div>
   </md-tab>

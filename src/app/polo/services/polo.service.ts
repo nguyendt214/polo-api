@@ -20,4 +20,11 @@ export class PoloService {
       .map((res: Response) => { return res.json(); })
       .toPromise();
   }
+
+  public getUserCoins(): Promise<any> {
+    let url = this.baseURL + 'kcoins/index/getUserCoin';
+    return this.http.get(url)
+      .map((res: Response) => { return res.json(); })
+      .toPromise();
+  }
 }
