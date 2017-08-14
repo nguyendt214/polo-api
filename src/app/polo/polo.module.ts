@@ -16,6 +16,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChecklistModule } from 'angular-checklist';
+import { PoloTradeComponent } from './trade/trade.component';
+import { Ng2TableModule } from 'ng2-table/ng2-table';
+import { PaginationModule } from 'ngx-bootstrap';
 @NgModule({
   imports: [
     PoloRoutingModule,
@@ -31,7 +34,9 @@ import { ChecklistModule } from 'angular-checklist';
     MdIconModule,
     MdCheckboxModule,
     MdTabsModule,
-    ChecklistModule
+    ChecklistModule,
+    Ng2TableModule,
+    PaginationModule.forRoot()
   ],
   exports: [
     BrowserModule,
@@ -45,9 +50,13 @@ import { ChecklistModule } from 'angular-checklist';
     MdIconModule,
     MdCheckboxModule,
     MdTabsModule,
-    ChecklistModule
+    ChecklistModule,
+    Ng2TableModule
   ],
-  declarations: [PoloComponent],
+  declarations: [
+    PoloComponent,
+    PoloTradeComponent
+  ],
   providers: [PoloService],
 })
 export class PoloModule { }

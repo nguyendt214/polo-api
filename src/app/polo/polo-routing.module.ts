@@ -4,9 +4,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PoloComponent } from './polo.component';
+import { PoloTradeComponent } from './trade/trade.component';
 
 const routes: Routes = [
-  { path: 'home', component: PoloComponent }
+  { path: 'home', component: PoloComponent },
+  { path: 'user/trading', component: PoloTradeComponent }
 ];
 
 @NgModule({
