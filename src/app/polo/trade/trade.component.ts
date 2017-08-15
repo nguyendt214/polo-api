@@ -1,25 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PoloService } from '../services/polo.service';
-import { TableData } from './table-data';
 import { NgTableComponent, NgTableFilteringDirective, NgTablePagingDirective, NgTableSortingDirective } from 'ng2-table/ng2-table';
-
+import { Observable } from 'rxjs/Rx';
 @Component({
   selector: 'polo-trade',
   templateUrl: 'trade.component.html'
 })
 
-export class PoloTradeComponent implements OnInit {
+export class PoloTradeComponent implements OnInit, OnDestroy {
   public poloData: any = [];
   public poloPrevData: any = [];
+  public btcList: Array<any> = [];
+  public xmrList: Array<any> = [];
+  public ethList: Array<any> = [];
+  public usdtList: Array<any> = [];
 
   public rows: Array<any> = [];
+  public btcRows: Array<any> = [];
+  public xmrRows: Array<any> = [];
+  public ethRows: Array<any> = [];
+  public usdtRows: Array<any> = [];
 
   public columns: Array<any> = [];
   public page: number = 1;
-  public itemsPerPage: number = 10;
+  public itemsPerPage: number = 25;
   public maxSize: number = 5;
   public numPages: number = 1;
   public length: number = 0;
+  public btcLength: number = 0;
+  public xmrLength: number = 0;
+  public ethLength: number = 0;
+  public usdtLength: number = 0;
+  private intervalId: any;
 
   public config: any = {
     paging: true,
@@ -28,13 +40,65 @@ export class PoloTradeComponent implements OnInit {
     className: ['table-striped', 'table-bordered']
   };
 
-  // private data: Array<any> = TableData;
+  public intervalTime = 20; // Second
 
   constructor(private poloService: PoloService) {
   }
 
   public ngOnInit() {
-    this.getPoloData();
+    // this.getPoloData();
+    this.getTradeInfo();
+    this.setIntervalCall();
+  }
+
+  public setIntervalCall() {
+    this.intervalId = setInterval(() => {
+      this.getTradeInfo();
+    }, this.intervalTime * 1000);
+  }
+
+  public getTradeInfo(): any {
+    this.poloService.getPoloData('returnTicker').then(data => {
+      Object.keys(data).forEach(key => {
+        let item = data[key];
+        item['code'] = key;
+        item['percentChange'] = Math.round(item['percentChange'] * 10000) / 100 + ' %';
+        item['quoteVolume'] = Number(item['quoteVolume']).toLocaleString("es-ES", { minimumFractionDigits: 2 });
+        this.poloData.push(item);
+        if (key.indexOf('BTC_') > -1) {
+          this.btcList.push(item);
+        } else if (key.indexOf('XMR_') > -1) {
+          this.xmrList.push(item);
+        } else if (key.indexOf('ETH_') > -1) {
+          this.ethList.push(item);
+        } else if (key.indexOf('USDT_') > -1) {
+          this.usdtList.push(item);
+        }
+
+      });
+      this.initTable();
+    });
+  }
+
+  public initTable() {
+    this.length = this.poloData.length;
+    this.columns = [
+      { title: 'Name', name: 'code', sort: 'asc' },
+      {
+        title: '24H High',
+        name: 'high24hr'
+      },
+      { title: '24H Low', name: 'low24hr' },
+      { title: 'Changed', name: 'percentChange' },
+      { title: 'Voloume', name: 'quoteVolume' }
+    ];
+
+    this.onChangeTable(this.config, this.btcList, 'BTC');
+    this.onChangeTable(this.config, this.xmrList, 'XMR');
+    this.onChangeTable(this.config, this.ethList, 'ETH');
+    this.onChangeTable(this.config, this.usdtList, 'USDT');
+    //Update sorting
+    this.config.sorting = { columns: this.columns };
   }
 
   public getPoloData() {
@@ -42,7 +106,7 @@ export class PoloTradeComponent implements OnInit {
       this.poloData = data;
       this.length = this.poloData.length;
       this.columns = [
-        { title: 'Name', name: 'code', filtering: { filterString: '', placeholder: 'Filter by code' } },
+        { title: 'Name', name: 'code' },
         {
           title: '24H High',
           name: 'high24hr'
@@ -64,6 +128,8 @@ export class PoloTradeComponent implements OnInit {
 
   public changeSort(data: any, config: any): any {
     if (!config.sorting) {
+      console.log('Not');
+
       return data;
     }
 
@@ -79,6 +145,8 @@ export class PoloTradeComponent implements OnInit {
     }
 
     if (!columnName) {
+      console.log('!columnName');
+
       return data;
     }
 
@@ -129,7 +197,11 @@ export class PoloTradeComponent implements OnInit {
     return filteredData;
   }
 
-  public onChangeTable(config: any, page: any = { page: this.page, itemsPerPage: this.itemsPerPage }): any {
+  public onChangeTable(config: any,
+    data: any = [],
+    type: string = 'BTC',
+    page: any = { page: this.page, itemsPerPage: this.itemsPerPage }
+  ): any {
     if (config.filtering) {
       Object.assign(this.config.filtering, config.filtering);
     }
@@ -137,15 +209,28 @@ export class PoloTradeComponent implements OnInit {
     if (config.sorting) {
       Object.assign(this.config.sorting, config.sorting);
     }
-    console.log(this.poloData);
 
-    let filteredData = this.changeFilter(this.poloData, this.config);
+    let filteredData = this.changeFilter(data, this.config);
     let sortedData = this.changeSort(filteredData, this.config);
-    this.rows = page && config.paging ? this.changePage(page, sortedData) : sortedData;
-    this.length = sortedData.length;
+    if (type === 'BTC') {
+      this.btcRows = page && config.paging ? this.changePage(page, sortedData) : sortedData;
+      this.btcLength = sortedData.length;
+    } else if (type === 'XMR') {
+      this.xmrRows = page && config.paging ? this.changePage(page, sortedData) : sortedData;
+      this.xmrLength = sortedData.length;
+    } else if (type === 'ETH') {
+      this.ethRows = page && config.paging ? this.changePage(page, sortedData) : sortedData;
+      this.ethLength = sortedData.length;
+    } else if (type === 'USDT') {
+      this.usdtRows = page && config.paging ? this.changePage(page, sortedData) : sortedData;
+      this.usdtLength = sortedData.length;
+    }
   }
 
   public onCellClick(data: any): any {
     console.log(data);
+  }
+  public ngOnDestroy() {
+    clearInterval(this.intervalId);
   }
 }

@@ -1,5 +1,4 @@
 <md-toolbar color="primary">
-
   <span>KEVIN-BLACK</span>
   <span class="example-spacer"></span>
   <button md-button [mdMenuTriggerFor]="appMenu"><md-icon>menu</md-icon></button>
@@ -8,7 +7,14 @@
 
 <md-menu #appMenu="mdMenu">
   <button md-menu-item (click)="gotoPage('user/trading')"> Trading </button>
+  <button md-menu-item (click)="gotoPage('home')"> Quản lý COIN </button>
+  <button md-menu-item (click)="gotoPage('price')">Giá Coin</button>
   <button md-menu-item> Hướng dẫn </button>
   <button md-menu-item> Liên hệ </button>
 </md-menu>
 <router-outlet></router-outlet>
+<div class="loading-overlay" *ngIf="onLoad">
+  <div class="spinner-container">
+    <div class="spinner"></div>
+  </div>
+</div>

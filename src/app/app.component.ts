@@ -1,18 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { PoloService } from './polo/services/polo.service';
 import { Router } from '@angular/router';
-
+import { HttpService as Http, HttpProgressService, ICustomErrorConfig } from '@nordnet/http';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  title = 'app works!';
+  private loadingSubscription: Subscription;
+  public onLoad: boolean = false;
 
   constructor(
     private poloService: PoloService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private httpProgressService: HttpProgressService
+  ) {
+
+    this.loadingSubscription = this.httpProgressService.loadingChange.subscribe((loading: boolean) => {
+      this.onLoad = loading;
+    });
+  }
 
   public ngOnInit() { }
 

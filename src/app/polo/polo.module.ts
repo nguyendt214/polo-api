@@ -19,6 +19,7 @@ import { ChecklistModule } from 'angular-checklist';
 import { PoloTradeComponent } from './trade/trade.component';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ngx-bootstrap';
+import { PriceComponent } from './price/price.component';
 @NgModule({
   imports: [
     PoloRoutingModule,
@@ -55,7 +56,8 @@ import { PaginationModule } from 'ngx-bootstrap';
   ],
   declarations: [
     PoloComponent,
-    PoloTradeComponent
+    PoloTradeComponent,
+    PriceComponent
   ],
   providers: [PoloService],
 })
