@@ -18,7 +18,9 @@ export class AppComponent implements OnInit {
   ) {
 
     this.loadingSubscription = this.httpProgressService.loadingChange.subscribe((loading: boolean) => {
-      this.onLoad = loading;
+      setTimeout(() => {
+        this.onLoad = loading;
+      }, 0);
     });
   }
 

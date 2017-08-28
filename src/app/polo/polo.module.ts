@@ -9,8 +9,11 @@ import {
   MdToolbarModule,
   MdIconModule,
   MdCheckboxModule,
-  MdTabsModule
+  MdTabsModule,
+  MdPaginatorModule,
+  MdTableModule
 } from '@angular/material';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -20,6 +23,7 @@ import { PoloTradeComponent } from './trade/trade.component';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ngx-bootstrap';
 import { PriceComponent } from './price/price.component';
+import { PoloReportComponent } from './reports/reports.component';
 @NgModule({
   imports: [
     PoloRoutingModule,
@@ -57,7 +61,8 @@ import { PriceComponent } from './price/price.component';
   declarations: [
     PoloComponent,
     PoloTradeComponent,
-    PriceComponent
+    PriceComponent,
+    PoloReportComponent
   ],
   providers: [PoloService],
 })

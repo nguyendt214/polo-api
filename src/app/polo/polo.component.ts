@@ -58,4 +58,8 @@ export class PoloComponent implements OnInit {
     }
   }
 
+  public update() {
+    this.poloService.updateUserCoins(this.userCoin);
+  }
+
 }

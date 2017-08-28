@@ -1,0 +1,68 @@
+<md-tab-group>
+  <!-- BTC -->
+  <md-tab label="BTC">
+    <div class="container" *ngFor="let coins of btcList; let code = index">
+      {{ index }}
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>24h Hight</th>
+            <th>24h Low</th>
+            <th>Price</th>
+            <th>Change</th>
+            <th>Volumn</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let coin of coins; let j = index">
+            <td>{{ coin.code }}</td>
+            <td>{{ coin.high24hr }}</td>
+            <td>{{ coin.low24hr }}</td>
+            <td>{{ coin.last }}</td>
+            <td>{{ coin.percentChange * 100 }}%</td>
+            <td>{{ coin.quoteVolume }}</td>
+            <td>{{ coin.created_at | date : 'dd/MM/yyyy hh:mm' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </md-tab>
+  <!-- XMR -->
+  <md-tab label="XMR">
+    <div class="container" *ngFor="let coins of xmrList">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>24h Hight</th>
+            <th>24h Low</th>
+            <th>Price</th>
+            <th>Change</th>
+            <th>Volumn</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <!-- <tbody>
+          <tr *ngFor="let coin of coins">
+            <td>{{ coin.code }}</td>
+            <td>{{ coin.high24hr }}</td>
+            <td>{{ coin.low24hr }}</td>
+            <td>{{ coin.last }}</td>
+            <td>{{ coin.percentChange }}</td>
+            <td>{{ coin.quoteVolume }}</td>
+            <td>{{ coin.created_at | date }}</td>
+          </tr>
+        </tbody> -->
+      </table>
+    </div>
+  </md-tab>
+  <!-- ETH -->
+  <md-tab label="ETH">
+  </md-tab>
+  <!-- USDT -->
+  <md-tab label="USDT">
+  </md-tab>
+</md-tab-group>
+<!-- <pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre> -->
