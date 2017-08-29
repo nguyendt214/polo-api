@@ -6,6 +6,9 @@
 </md-toolbar>
 
 <md-menu #appMenu="mdMenu">
+  <button md-menu-item (click)="gotoPage('30m')"> 30 Mins </button>
+  <button md-menu-item (click)="gotoPage('1h')"> 60 Mins </button>
+  <button md-menu-item (click)="gotoPage('1day')"> 1 Day </button>
   <button md-menu-item (click)="gotoPage('reports')"> Reports </button>
   <button md-menu-item (click)="gotoPage('home')"> Quản lý COIN </button>
   <button md-menu-item (click)="gotoPage('price')">Giá Coin</button>

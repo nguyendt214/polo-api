@@ -7,10 +7,10 @@ import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
 
 @Component({
-  selector: 'app-polo-report',
+  selector: 'app-polo-report-60m',
   templateUrl: './reports.component.html'
 })
-export class PoloReportComponent implements OnInit {
+export class PoloReport1DayComponent implements OnInit {
   public coins: any;
   public btcList: Array<any> = [];
   public xmrList: Array<any> = [];
@@ -21,7 +21,7 @@ export class PoloReportComponent implements OnInit {
   constructor(private poloService: PoloService) { }
 
   public ngOnInit() {
-    this.poloService.getDataFromTable('kevin_returnTicker').then(data => {
+    this.poloService.getDataFromTable('kevin_returnTicker_1day').then(data => {
       this.coins = data;
       let list = this.poloService.groupBy(data, 'code');
       Object.keys(list).forEach(key => {

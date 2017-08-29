@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import * as moment from 'moment';
 
@@ -35,6 +35,7 @@ export class PoloService {
 
   public groupBy(list: Array<any>, key: string) {
     let groups = [];
+    list = this.sortBy(list, 'created_at');
     for (let i: number = 0; i < list.length; i++) {
       let groupName = list[i][key];
       if (!groups[groupName]) {
@@ -50,14 +51,14 @@ export class PoloService {
    */
   public sortBy(list: Array<any>, key: string) {
     return list.sort((a, b) => {
-      let aDate = moment(a.date, 'YYYY-MM-DD HH:mm:ssZ');
-      let bDate = moment(b.date, 'YYYY-MM-DD HH:mm:ssZ');
+      let aDate = moment(a[key], 'YYYY-MM-DD HH:mm:ssZ');
+      let bDate = moment(b[key], 'YYYY-MM-DD HH:mm:ssZ');
       return aDate > bDate ? -1 : 1;
     });
   }
 
-  public updateUserCoins(coins) {
-    let url = this.baseURL + 'kcoins/index/updateUserCoins';
-    this.http.post(url, coins).toPromise();
+  public updateUserCoins(coins: any) {
+    let url = this.baseURL + 'kcoins/index/updateUserCoins?coins=' + coins.toString();
+    this.http.get(url).toPromise();
   }
 }

@@ -26,10 +26,11 @@ body {
   width: 100%;
   height: 100%;
   background-color:rgba(0, 0, 0, 0.85);
-  background: url('./assets/images/giphy-5gif.gif') fixed center center;
+  background: url('./assets/images/giphy-5gif.gif') no-repeat fixed center center;
   z-index: 300;
   color:white;
   user-select: none;
+  opacity: 0.6;
 }
 
 

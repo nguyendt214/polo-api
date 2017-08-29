@@ -7,10 +7,10 @@ import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
 
 @Component({
-  selector: 'app-polo-report',
+  selector: 'app-polo-report-30m',
   templateUrl: './reports.component.html'
 })
-export class PoloReportComponent implements OnInit {
+export class PoloReport30mComponent implements OnInit {
   public coins: any;
   public btcList: Array<any> = [];
   public xmrList: Array<any> = [];

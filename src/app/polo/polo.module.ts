@@ -24,6 +24,9 @@ import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { PaginationModule } from 'ngx-bootstrap';
 import { PriceComponent } from './price/price.component';
 import { PoloReportComponent } from './reports/reports.component';
+import { PoloReport30mComponent } from './reports/30m.component';
+import { PoloReport60mComponent } from './reports/60m.component';
+import { PoloReport1DayComponent } from './reports/1day.component';
 @NgModule({
   imports: [
     PoloRoutingModule,
@@ -62,7 +65,10 @@ import { PoloReportComponent } from './reports/reports.component';
     PoloComponent,
     PoloTradeComponent,
     PriceComponent,
-    PoloReportComponent
+    PoloReportComponent,
+    PoloReport30mComponent,
+    PoloReport60mComponent,
+    PoloReport1DayComponent
   ],
   providers: [PoloService],
 })
