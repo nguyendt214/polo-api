@@ -5,19 +5,20 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
+import { MenuItem } from 'primeng/primeng';
 
 @Component({
   selector: 'app-polo-report-60m',
-  templateUrl: './reports.component.html'
+  templateUrl: './1day.component.html'
 })
 export class PoloReport1DayComponent implements OnInit {
-  public coins: any;
+  public coins: Array<any> = [];
   public btcList: Array<any> = [];
   public xmrList: Array<any> = [];
   public ethList: Array<any> = [];
   public usdtList: Array<any> = [];
   public userCoin: Array<any> = [];
-
+  public cols: any;
   constructor(private poloService: PoloService) { }
 
   public ngOnInit() {
@@ -37,6 +38,17 @@ export class PoloReport1DayComponent implements OnInit {
         }
       });
     });
+    console.log(this.coins);
+
+    this.cols = [
+      { field: 'code', header: 'Code' },
+      { field: 'high24hr', header: 'Cao' },
+      { field: 'low24hr', header: 'Thấp' },
+      { field: 'last', header: 'Price' },
+      { field: 'percentChange', header: 'Changed' },
+      { field: 'quoteVolume', header: 'Volumn' },
+      { field: 'created_at', header: 'Date' }
+    ];
   }
 
 }

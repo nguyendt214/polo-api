@@ -1,0 +1,18 @@
+<p-dataTable [value]="coins" sortField="code" rowGroupMode="subheader" groupField="code" expandableRowGroups="true" [sortableRowGroup]="false">
+  <p-header>Report by DAY</p-header>
+  <ng-template pTemplate="rowgroupheader" let-rowData>{{rowData['code']}}</ng-template>
+  <p-column field="code" header="Code" [sortable]="true"></p-column>
+  <p-column field="high24hr" header="high24hr"[sortable]="true"></p-column>
+  <p-column field="low24hr" header="low24hr"[sortable]="true"></p-column>
+  <p-column field="last" header="Price"[sortable]="true"></p-column>
+  <p-column field="percentChange" header="percentChange"[sortable]="true"></p-column>
+  <p-column field="quoteVolume" header="quoteVolume"[sortable]="true"></p-column>
+  <p-column field="created_at" header="created_at"[sortable]="true"></p-column>
+  <!-- <ng-template let-col let-car="rowData" pTemplate="body">
+    <span>{{car[col.field] | currency:'USD':true:'.0-0'}}</span>
+  </ng-template> -->
+  <!-- <ng-template pTemplate="rowgroupfooter" let-car>
+    <td colspan="3" style="text-align:right">Total Price</td>
+    <td>{{calculateGroupTotal(car['brand']) | currency:'USD':true:'.0-0' }}</td>
+  </ng-template> -->
+</p-dataTable>
