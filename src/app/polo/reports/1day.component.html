@@ -1,13 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-auto">
+      <button class="btn-primary" (click)="lastData()">GET LAST DATE</button>
+    </div>
+  </div>
+</div>
 <p-dataTable [value]="coins" sortField="code" rowGroupMode="subheader" groupField="code" expandableRowGroups="true" [sortableRowGroup]="false">
   <p-header>Report by DAY</p-header>
   <ng-template pTemplate="rowgroupheader" let-rowData>{{rowData['code']}}</ng-template>
-  <p-column field="code" header="Code" [sortable]="true"></p-column>
-  <p-column field="high24hr" header="high24hr"[sortable]="true"></p-column>
-  <p-column field="low24hr" header="low24hr"[sortable]="true"></p-column>
-  <p-column field="last" header="Price"[sortable]="true"></p-column>
-  <p-column field="percentChange" header="percentChange"[sortable]="true"></p-column>
-  <p-column field="quoteVolume" header="quoteVolume"[sortable]="true"></p-column>
-  <p-column field="created_at" header="created_at"[sortable]="true"></p-column>
+  <p-column field="code" header="Code"></p-column>
+  <p-column field="high24hr" header="high24hr"></p-column>
+  <p-column field="low24hr" header="low24hr"></p-column>
+  <p-column field="last" header="Price"></p-column>
+  <p-column field="percentChange" header="percentChange"></p-column>
+  <p-column field="quoteVolume" header="quoteVolume"></p-column>
+  <p-column field="created_at" header="created_at"></p-column>
   <!-- <ng-template let-col let-car="rowData" pTemplate="body">
     <span>{{car[col.field] | currency:'USD':true:'.0-0'}}</span>
   </ng-template> -->

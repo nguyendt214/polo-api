@@ -31,6 +31,7 @@ import {
   AccordionModule, MenuItem, DataTableModule, SharedModule,
   PaginatorModule
 } from 'primeng/primeng';
+import { CacheService, CacheStoragesEnum } from 'ng2-cache/ng2-cache';
 @NgModule({
   imports: [
     PoloRoutingModule,
@@ -80,6 +81,6 @@ import {
     PoloReport60mComponent,
     PoloReport1DayComponent
   ],
-  providers: [PoloService],
+  providers: [PoloService, CacheService],
 })
 export class PoloModule { }
