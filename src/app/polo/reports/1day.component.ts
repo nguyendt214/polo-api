@@ -18,8 +18,15 @@ export class PoloReport1DayComponent implements OnInit {
   public xmrList: Array<any> = [];
   public ethList: Array<any> = [];
   public usdtList: Array<any> = [];
+  public btcListOrigin;
+  public xmrListOrigin;
+  public ethListOrigin;
+  public usdtListOrigin;
+
   public userCoin: Array<any> = [];
   public cols: any;
+  public btcKey: string = '';
+  public objectKeys = Object.keys;
   constructor(private poloService: PoloService, private _cacheService: CacheService) { }
 
   public ngOnInit() {
@@ -45,7 +52,7 @@ export class PoloReport1DayComponent implements OnInit {
     Object.keys(list).forEach(key => {
       let item = list[key];
       if (key.indexOf('BTC_') > -1) {
-        this.btcList.push(item);
+        this.btcList[key] = item;
       } else if (key.indexOf('XMR_') > -1) {
         this.xmrList[key] = item;
       } else if (key.indexOf('ETH_') > -1) {
@@ -54,6 +61,11 @@ export class PoloReport1DayComponent implements OnInit {
         this.usdtList[key] = item;
       }
     });
+    this.btcListOrigin = this.btcList;
+    this.xmrListOrigin = this.xmrList;
+    this.ethListOrigin = this.ethList;
+    this.usdtListOrigin = this.usdtList;
+
   }
 
   public callApiGetData() {
@@ -66,5 +78,19 @@ export class PoloReport1DayComponent implements OnInit {
   }
   public lastData() {
     this.callApiGetData();
+  }
+
+  public searchBtc() {
+    if (!this.btcKey) {
+      this.btcList = this.btcListOrigin;
+      return;
+    }
+    let temp: Array<any> = [];
+    for (let index in this.btcListOrigin) {
+      if (index.indexOf(this.btcKey.toLocaleUpperCase()) > -1) {
+        temp[index] = this.btcListOrigin[index];
+      }
+    }
+    this.btcList = temp;
   }
 }

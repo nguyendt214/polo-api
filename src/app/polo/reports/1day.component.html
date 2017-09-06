@@ -1,25 +1,131 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12 col-md-auto">
-      <button class="btn-primary" (click)="lastData()">GET LAST DATE</button>
+      <button class="btn-primary" (click)="lastData()">GET LAST DATA</button>
     </div>
   </div>
 </div>
-<p-dataTable [value]="coins" sortField="code" rowGroupMode="subheader" groupField="code" expandableRowGroups="true" [sortableRowGroup]="false">
-  <p-header>Report by DAY</p-header>
-  <ng-template pTemplate="rowgroupheader" let-rowData>{{rowData['code']}}</ng-template>
-  <p-column field="code" header="Code"></p-column>
-  <p-column field="high24hr" header="high24hr"></p-column>
-  <p-column field="low24hr" header="low24hr"></p-column>
-  <p-column field="last" header="Price"></p-column>
-  <p-column field="percentChange" header="percentChange"></p-column>
-  <p-column field="quoteVolume" header="quoteVolume"></p-column>
-  <p-column field="created_at" header="created_at"></p-column>
-  <!-- <ng-template let-col let-car="rowData" pTemplate="body">
-    <span>{{car[col.field] | currency:'USD':true:'.0-0'}}</span>
-  </ng-template> -->
-  <!-- <ng-template pTemplate="rowgroupfooter" let-car>
-    <td colspan="3" style="text-align:right">Total Price</td>
-    <td>{{calculateGroupTotal(car['brand']) | currency:'USD':true:'.0-0' }}</td>
-  </ng-template> -->
-</p-dataTable>
+<md-tab-group>
+
+  <!-- BTC -->
+  <md-tab label="BTC">
+    <div class="form-group">
+      <label for="usr">Tìm theo code</label>
+      <input type="text" class="form-control" [(ngModel)]="btcKey" (keyup)="searchBtc()">
+    </div>
+
+    <div class="container" *ngFor="let key of objectKeys(btcList)">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>24h Hight</th>
+            <th>24h Low</th>
+            <th>Price</th>
+            <th>Change</th>
+            <th>Volumn</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let coin of btcList[key]">
+            <td>{{ coin.code }}</td>
+            <td>{{ coin.high24hr }}</td>
+            <td>{{ coin.low24hr }}</td>
+            <td>{{ coin.last }}</td>
+            <td>{{ coin.percentChange * 100 }}%</td>
+            <td>{{ coin.quoteVolume }}</td>
+            <td>{{ coin.created_at | date : 'dd/MM/yyyy hh:mm' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </md-tab>
+  <!-- XMR -->
+  <md-tab label="XMR">
+    <div class="container" *ngFor="let coins of xmrList">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>24h Hight</th>
+            <th>24h Low</th>
+            <th>Price</th>
+            <th>Change</th>
+            <th>Volumn</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let coin of coins">
+            <td>{{ coin.code }}</td>
+            <td>{{ coin.high24hr }}</td>
+            <td>{{ coin.low24hr }}</td>
+            <td>{{ coin.last }}</td>
+            <td>{{ coin.percentChange * 100 }}%</td>
+            <td>{{ coin.quoteVolume }}</td>
+            <td>{{ coin.created_at | date : 'dd/MM/yyyy hh:mm' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </md-tab>
+  <!-- ETH -->
+  <md-tab label="ETH">
+    <div class="container" *ngFor="let coins of ethList">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>24h Hight</th>
+            <th>24h Low</th>
+            <th>Price</th>
+            <th>Change</th>
+            <th>Volumn</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let coin of coins">
+            <td>{{ coin.code }}</td>
+            <td>{{ coin.high24hr }}</td>
+            <td>{{ coin.low24hr }}</td>
+            <td>{{ coin.last }}</td>
+            <td>{{ coin.percentChange * 100 }}%</td>
+            <td>{{ coin.quoteVolume }}</td>
+            <td>{{ coin.created_at | date : 'dd/MM/yyyy hh:mm' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </md-tab>
+  <!-- USDT -->
+  <md-tab label="USDT">
+    <div class="container" *ngFor="let coins of usdtList">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>24h Hight</th>
+            <th>24h Low</th>
+            <th>Price</th>
+            <th>Change</th>
+            <th>Volumn</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let coin of coins">
+            <td>{{ coin.code }}</td>
+            <td>{{ coin.high24hr }}</td>
+            <td>{{ coin.low24hr }}</td>
+            <td>{{ coin.last }}</td>
+            <td>{{ coin.percentChange * 100 }}%</td>
+            <td>{{ coin.quoteVolume }}</td>
+            <td>{{ coin.created_at | date : 'dd/MM/yyyy hh:mm' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </md-tab>
+</md-tab-group>
