@@ -1,40 +1,27 @@
-<h1>Chọn coin bạn đang sở hữu</h1>
-<button class="btn-primary" (click)="update()">Update</button>
-<md-tab-group>
-  <!-- BTC -->
-  <md-tab label="BTC">
-    <div class="container">
-      <div class="col-sm-6 col-md-6" *ngFor="let coin of btcList">
-        <md-checkbox checked="true" *ngIf="coin.has == 2" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
-        <md-checkbox *ngIf="coin.has == 1" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
-      </div>
+<div class="col-lg-12">
+  <h1>Chốt profit/ lost</h1>
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="form-group">
+      <label>Giá mua</label>
+      <input type="buyPrice" class="form-control" placeholder="Buy Price" formControlName="buyPrice" autofocus>
+      <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
     </div>
-  </md-tab>
-  <!-- XMR -->
-  <md-tab label="XMR">
-    <div class="container">
-      <div class="col-sm-6 col-md-6" *ngFor="let coin of xmrList">
-        <md-checkbox checked="true" *ngIf="coin.has == 2" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
-        <md-checkbox *ngIf="coin.has == 1" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
-      </div>
+    <div class="form-group">
+      <select class="form-control" formControlName="profitLost">
+        <option value="profit">Tăng</option>
+        <option value="lost">Giảm</option>
+      </select>
     </div>
-  </md-tab>
-  <!-- ETH -->
-  <md-tab label="ETH">
-    <div class="container">
-      <div class="col-sm-6 col-md-6" *ngFor="let coin of ethList">
-        <md-checkbox checked="true" *ngIf="coin.has == 2" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
-        <md-checkbox *ngIf="coin.has == 1" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
-      </div>
+    <div class="form-group">
+      <select class="form-control" formControlName="percent">
+        <option *ngFor="let percent of percentList" value="{{ percent }}">{{ percent }}%</option>
+      </select>
     </div>
-  </md-tab>
-  <!-- USDT -->
-  <md-tab label="USDT">
-    <div class="container">
-      <div class="col-sm-6 col-md-6" *ngFor="let coin of usdtList">
-        <md-checkbox checked="true" *ngIf="coin.has == 2" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
-        <md-checkbox *ngIf="coin.has == 1" (change)="toogle(coin.code, $event)">{{ coin.name }} ( {{ coin.code }})</md-checkbox>
-      </div>
-    </div>
-  </md-tab>
-</md-tab-group>
+    <button type="submit" class="btn btn-primary">Tính Toán</button>
+  </form>
+  <div *ngIf="showResult" class="row pt-10">
+    <div class="clearfix"></div>
+    <div class="col-xs-6 text-left">Chốt</div>
+    <div class="col-xs-6 text-right">{{ finalPrice }}</div>
+  </div>
+</div>

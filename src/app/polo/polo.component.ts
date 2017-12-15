@@ -1,65 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { PoloService } from './services/polo.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { log } from 'util';
 
 @Component({
   selector: 'app-polo',
   templateUrl: './polo.component.html'
 })
 export class PoloComponent implements OnInit {
-  public coins: any;
-  public btcList: Array<any> = [];
-  public xmrList: Array<any> = [];
-  public ethList: Array<any> = [];
-  public usdtList: Array<any> = [];
-  public userCoin: Array<any> = [];
-  constructor(private poloService: PoloService) { }
+  public form: FormGroup;
+  public percentList: Array<number> = [];
+  public showResult: boolean = false;
+  public finalPrice: any = 0;
+  constructor(
+    @Inject(FormBuilder) fb: FormBuilder,
+    private poloService: PoloService
+  ) {
+    this.initForm(fb);
+  }
 
   public ngOnInit() {
-    this.poloService.getUserCoins().then(data => {
-      this.coins = data;
-      this.coins.forEach(element => {
-        let code = element.tab;
-        switch (code) {
-          case 'BTC':
-            this.addUserCoin(element);
-            this.btcList.push(element);
-            break;
-          case 'XMR':
-            this.addUserCoin(element);
-            this.xmrList.push(element);
-            break;
-          case 'ETH':
-            this.addUserCoin(element);
-            this.ethList.push(element);
-            break;
-          case 'USDT':
-            this.addUserCoin(element);
-            this.usdtList.push(element);
-            break;
-          default:
-            break;
-        }
-      });
+    for (let i = 1; i <= 100; i++) {
+      this.percentList.push(i);
+    }
+  }
+
+  /**
+   * Init Form
+   *
+   * @param {FormBuilder} fb
+   */
+  public initForm(fb: FormBuilder): void {
+    this.form = fb.group({
+      buyPrice: '',
+      profitLost: 'profit',
+      percent: 5
     });
   }
 
-  public addUserCoin(coin: any) {
-    if (coin.has == 2) {
-      this.userCoin.push(coin.code);
+  /**
+   * Submit Form
+   *
+   * @param {*} data
+   */
+  public submit(): void {
+    console.log(this.form.value);
+    this.showResult = true;
+    let price = this.form.get('buyPrice').value;
+    let percent = this.form.get('percent').value;
+    let profit = this.form.get('profitLost').value;
+    if (profit === 'profit') {
+      this.finalPrice = price * (100 + percent) / 100;
+    } else {
+      this.finalPrice = price * (100 - percent) / 100;
     }
-  }
-
-  public toogle(code: string, val: any) {
-    let coinIdx = this.userCoin.indexOf(code);
-    if (val.checked && coinIdx === -1) {
-      this.userCoin.push(code);
-    } else if (!val.checked && coinIdx > -1) {
-      this.userCoin.splice(coinIdx, 1);
-    }
-  }
-
-  public update() {
-    this.poloService.updateUserCoins(this.userCoin);
   }
 
 }

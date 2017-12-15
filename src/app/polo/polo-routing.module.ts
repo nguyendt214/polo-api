@@ -10,6 +10,7 @@ import { PoloReportComponent } from './reports/reports.component';
 import { PoloReport30mComponent } from './reports/30m.component';
 import { PoloReport60mComponent } from './reports/60m.component';
 import { PoloReport1DayComponent } from './reports/1day.component';
+import { FibonacciComponent } from './fibonacci/fibonacci.component';
 
 const routes: Routes = [
   { path: 'home', component: PoloComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'reports', component: PoloReportComponent },
   { path: '30m', component: PoloReport30mComponent },
   { path: '1h', component: PoloReport60mComponent },
-  { path: '1day', component: PoloReport1DayComponent }
+  { path: '1day', component: PoloReport1DayComponent },
+  { path: 'fibonacci', component: FibonacciComponent }
 ];
 
 @NgModule({

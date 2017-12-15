@@ -15,7 +15,7 @@ import {
 } from '@angular/material';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChecklistModule } from 'angular-checklist';
@@ -32,12 +32,14 @@ import {
   PaginatorModule
 } from 'primeng/primeng';
 import { CacheService, CacheStoragesEnum } from 'ng2-cache/ng2-cache';
+import { FibonacciComponent } from './fibonacci/fibonacci.component';
 @NgModule({
   imports: [
     PoloRoutingModule,
     MdCheckboxModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     BrowserAnimationsModule,
     MdButtonModule,
@@ -58,6 +60,7 @@ import { CacheService, CacheStoragesEnum } from 'ng2-cache/ng2-cache';
   exports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     BrowserAnimationsModule,
     MdButtonModule,
@@ -79,7 +82,8 @@ import { CacheService, CacheStoragesEnum } from 'ng2-cache/ng2-cache';
     PoloReportComponent,
     PoloReport30mComponent,
     PoloReport60mComponent,
-    PoloReport1DayComponent
+    PoloReport1DayComponent,
+    FibonacciComponent
   ],
   providers: [PoloService, CacheService],
 })
